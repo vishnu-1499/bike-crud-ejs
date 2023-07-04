@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+    <h1> Bike Details </h1>
+
+    <form id="addForm" method="post">
+
+        <label> Register Bike </label>
+        <input type="text" name="registerBike" id="registerBike" placeholder="Enter your Register Bike..." />
+        <br/><br/>
+
+        <label> Bike Name</label>
+        <input type="text" name="bikeName" id="bikeName" placeholder="Enter your Bike Name..." />
+        <br/><br/>
+
+        <label> Bike Model </label>
+        <input type="number" name="bikeModel" id="bikeModel" placeholder="Enter your Bike Model ..." />
+        <br/><br/>
+
+        <label> Branch Name </label>
+        <input type="text" name="branchName" id="branchName" placeholder="Enter your Branch Name ..." />
+        <br/><br/>
+
+        <label> Bike Price </label>
+        <input type="number" name="bikePrice" id="bikePrice" placeholder="Enter your Bike Price..." />
+        <br/><br/>
+
+        <label> Date</label>
+        <input type="date" name="date" id="date" placeholder="Enter your Date..." />
+        <br/><br/>
+
+        <button type="submit"> Submit </button>
+    </form>
+    <script>
+        const form = $("#addForm")
+        form.on("submit", submitHandler)
+
+        function submitHandler(e){
+            e.preventDefault()
+            console.log(form.serialize());
+
+            $.ajax({
+                url: "http://localhost:5000/create",
+                type: "post",
+                dataType: "json",
+                data: form.serialize()
+            })
+            window.location.href="http://localhost:5000/read"
+        }
+    </script>
+</body>
+</html>

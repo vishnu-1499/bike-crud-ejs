@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<style>
+    table,th,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin: 20px;
+        padding: 10px;
+    }
+</style>
+<body>
+    <h1> Bike Table Details </h1>
+    <a href="/add"> <button> Bike Booking </button> </a>
+    <table>
+        <tr>
+            <th> Register Bike </th>
+            <th> Bike Name </th>
+            <th> Bike Model</th>
+            <th> Branch Name </th>
+            <th> Bike Price</th>
+            <th> Date</th>
+            <th colspan="3"> Action</th>
+        </tr>
+        <% for (i=0; i< set.length ; i++) { %>
+            <tr>
+                <td> <%- set[i].registerBike %> </td>
+                <td> <%- set[i].bikeName %> </td>
+                <td> <%- set[i].bikeModel %> </td>
+                <td> <%- set[i].branchName %> </td>
+                <td> <%- set[i].bikePrice %> </td>
+                <td> <%- set[i].date %> </td>
+                <td><a href="/update/<%- set[i]._id%>"><button> Update </button></a></td>
+                <td>    <a href="/emi/<%- set[i]._id %> "> <button> Monthly EMI </button> </a></td>
+                <td><a><button onclick="confirmDelete('<%- set[i].id%>')"> Delete </button></a></td>
+            </tr>
+        <% } %>
+    </table>
+    <script>
+        function confirmDelete(remove){
+
+            $.ajax({
+                url: `http://localhost:5000/delete/${remove}`,
+                type: "post",
+                dataType: "json"
+            })
+            window.location.reload()
+        }
+    </script>
+</body>
+</html>

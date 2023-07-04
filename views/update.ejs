@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+    <h1> Bike Details </h1>
+
+    <form id="updateForm" method="post">
+
+        <label> Register Bike </label>
+        <input type="text" name="registerBike" id="registerBike" value="<%- user.registerBike %>" />
+        <br/><br/>
+
+        <label> Bike Name</label>
+        <input type="text" name="bikeName" id="bikeName" value="<%- user.bikeName %>" />
+        <br/><br/>
+
+        <label> Bike Model </label>
+        <input type="text" name="bikeModel" id="bikeModel" value="<%- user.bikeModel %>" />
+        <br/><br/>
+
+        <label> Branch Name </label>
+        <input type="text" name="branchName" id="branchName" value="<%- user.branchName %>" />
+        <br/><br/>
+
+        <label> Bike Price </label>
+        <input type="text" name="bikePrice" id="bikePrice" value="<%- user.bikePrice %>" />
+        <br/><br/>
+
+        <label> Date</label>
+        <input type="date" name="date" id="date" value="<%- user.date %>" />
+        <br/><br/>
+
+        <button type="submit"> Submit </button>
+    </form>
+    <script>
+        const form = $("#updateForm")
+        form.on("submit", submitHandler)
+
+        function submitHandler(e){
+            e.preventDefault()
+
+            $.ajax({
+                url: "http://localhost:5000/update/<%- user._id%>",
+                type: "post",
+                dataType: "json",
+                data: form.serialize()
+            })
+            window.location.href="http://localhost:5000/read"
+        }
+    </script>
+</body>
+</html>
